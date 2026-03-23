@@ -1,0 +1,43 @@
+# Production Pipeline Configuration
+# Spiral 2, Phase 2D, Module 06 (Capstone)
+
+experiment:
+  name: "spiral2_capstone"
+  tracking_uri: "mlruns"
+
+data:
+  dataset: "cifar10"
+  data_dir: "./data"
+  batch_size: 64
+  num_workers: 4
+  augmentation: true
+  val_ratio: 0.1
+
+model:
+  architecture: "resnet18"  # or "custom_cnn", "transformer"
+  n_classes: 10
+
+training:
+  n_epochs: 50
+  optimizer: "adamw"
+  learning_rate: 0.001
+  weight_decay: 0.01
+  lr_scheduler: "cosine"
+  warmup_epochs: 5
+  gradient_clip_norm: 1.0
+  mixed_precision: true
+  early_stopping_patience: 10
+
+checkpointing:
+  save_dir: "./checkpoints"
+  save_best_only: true
+
+reproducibility:
+  seed: 42
+
+hpo:
+  n_trials: 20
+  search_space:
+    learning_rate: [0.0001, 0.01]
+    weight_decay: [0.0001, 0.1]
+    batch_size: [32, 64, 128]

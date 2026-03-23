@@ -1,6 +1,51 @@
 [project]
 name = "learningml"
 version = "0.1.0"
-description = "Add your description here"
+description = "ML learning curriculum — from basics to research frontier"
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "numpy",
+    "pandas",
+    "matplotlib",
+    "seaborn",
+    "scikit-learn",
+    "jupyter",
+    "ipykernel",
+]
+
+[project.optional-dependencies]
+spiral1 = [
+    "scikit-learn",
+    "torch",
+    "torchvision",
+]
+spiral2 = [
+    "scikit-learn",
+    "torch",
+    "mlflow",
+    "optuna",
+    "tqdm",
+]
+spiral3 = [
+    "torch",
+    "torchvision",
+    "transformers",
+    "datasets",
+    "gymnasium",
+    "networkx",
+    "pyro-ppl",
+]
+dev = [
+    "pytest",
+    "ruff",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["spiral_1", "spiral_2", "spiral_3"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "--import-mode=importlib"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+]
